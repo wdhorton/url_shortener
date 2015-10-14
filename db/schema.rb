@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014185955) do
+ActiveRecord::Schema.define(version: 20151014205040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20151014185955) do
   add_index "shortened_urls", ["short_url"], name: "index_shortened_urls_on_short_url", unique: true, using: :btree
   add_index "shortened_urls", ["submitter_id"], name: "index_shortened_urls_on_submitter_id", using: :btree
 
+  create_table "tag_topics", force: true do |t|
+    t.string   "topic"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email"
     t.datetime "created_at"
@@ -35,14 +41,14 @@ ActiveRecord::Schema.define(version: 20151014185955) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  create_table "visit_tables", force: true do |t|
+  create_table "visits", force: true do |t|
     t.integer  "user_id"
     t.integer  "url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "visit_tables", ["url_id"], name: "index_visit_tables_on_url_id", using: :btree
-  add_index "visit_tables", ["user_id"], name: "index_visit_tables_on_user_id", using: :btree
+  add_index "visits", ["url_id"], name: "index_visits_on_url_id", using: :btree
+  add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
 end

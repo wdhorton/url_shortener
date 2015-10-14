@@ -58,3 +58,5 @@ group :development do
   # pry > irb
   gem 'pry-rails'
 end
+
+gem 'launchy'
